@@ -85,9 +85,9 @@
   // student who clicks it gets the tutorial twice in two tabs. "silent" keeps
   // the forwarding (the tutorial needs it) and drops only the pop-up. Do NOT
   // use "ignore": that stops forwarding and the tutorial won't load.
-  // Classic learnr (.Rmd) tutorials run as Shiny apps on a random port, so
-  // this entry doesn't cover them; a broad port range would, but would also
-  // hide pop-ups for other tools students use (e.g. Live Server).
+  // One port is enough: every course tutorial is Quarto on learnr2 (classic
+  // learnr left the image in v1.2.6), and a broad port range would also hide
+  // pop-ups for other tools students use (e.g. Live Server).
   "portsAttributes": {
     "7446": {
       "label": "R tutorials",
@@ -96,16 +96,16 @@
   },
 
   // NO postCreateCommand right now — RETIRED 2026-07-30. All course
-  // packages, including primer.tutorials, ship at whatever versions the
-  // image baked; the live at-create refresh of primer.tutorials was removed
-  // because the baked version is recent enough, making creates faster and
-  // GitHub-independent.
+  // packages ship at whatever versions the image baked; the live at-create
+  // refresh of a course package was removed because the baked version is
+  // recent enough, making creates faster and GitHub-independent.
   //
   // The discussion below is KEPT ON PURPOSE: it is the recipe if course
   // content ever again needs to move faster than image releases. To revive,
-  // restore this line here:
+  // restore this line here, naming the package to track (one of the baked
+  // course packages, e.g. vscode.tutorials):
   //
-  //   "postCreateCommand": "R -q -e 'pak::pkg_install(\"PPBDS/primer.tutorials\", ask = FALSE)'",
+  //   "postCreateCommand": "R -q -e 'pak::pkg_install(\"PPBDS/vscode.tutorials\", ask = FALSE)'",
   //
   // and re-read the following before doing so:
   //
@@ -118,7 +118,7 @@
   //
   // - No upgrade = TRUE: deps are already baked at known-good versions, so
   //   the refresh touches only the named package and avoids re-churning the
-  //   learnr/knitr/xfun chain (see the xfun ABI note in the devcontainers
+  //   knitr/xfun chain (see the xfun ABI note in the devcontainers
   //   Dockerfile).
   //
   // - ACCEPTED RISK — blast radius: tracking GitHub HEAD means a bad commit
@@ -157,7 +157,7 @@
       //
       // DELIBERATELY ABSENT: the AI assistant *extensions* (anthropic.claude-code,
       // openai.chatgpt). The AI tools ship as CLIs in the image (claude, codex,
-      // agy, aider) and that is intentional — do NOT add the extension panels
+      // agy, grok, aider) and that is intentional — do NOT add the extension panels
       // here. Tested 2026-06: the in-editor panels are webviews that render
       // broken in the browser-based Codespaces client (garbled/overlapping UI),
       // and there is no reliable desktop fallback for a big slice of students —

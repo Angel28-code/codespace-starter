@@ -5,8 +5,8 @@
 # exists on your GitHub account, it's cloned; otherwise it's created.
 #
 #   Usage:  connect-repo [--no-agents] <repo-name>
-#   (welcome.sh installs the `connect-repo` wrapper on PATH; invoking
-#   .devcontainer/connect-repo.sh directly works too)
+#   (setup.sh installs the `connect-repo` wrapper on PATH at Codespace
+#   create; invoking .devcontainer/connect-repo.sh directly works too)
 #
 # By default the new repo gets a copy of AGENTS.md (guidance on how AI
 # assistants should work with students in this course); --no-agents skips it.
