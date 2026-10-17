@@ -17,7 +17,7 @@
   // so KEEP this note). Also note: an ordinary push to main touching this
   // file does not reliably fire a prebuild either — the 2026-08-11 "better
   // start up" push never triggered one.)
-  // The PPBDS image, pinned to v1.2.8. Since v1.0.0 there is ONE image for
+  // The PPBDS image, pinned to v1.2.9. Since v1.0.0 there is ONE image for
   // the whole org (ghcr.io/ppbds/devcontainer — it replaced the old
   // devcontainers/base + /dev + /student trio, and additionally bakes the
   // package-development tooling: devtools, pkgdown, roxygen2, testthat,
@@ -74,7 +74,7 @@
   // OTHER repos (e.g., cloning a sibling package and pushing to it)
   // requires a one-time `gh auth login` per Codespace — that's by design,
   // not a bug. The built-in token is read-mostly outside the home repo.
-  "image": "ghcr.io/ppbds/devcontainer:1.2.8",
+  "image": "ghcr.io/ppbds/devcontainer:1.2.9",
 
   // Forward the R tutorial server's port SILENTLY. learnr2::run_tutorial()
   // (which the R Tutorials extension calls) always serves on port 7446 and
@@ -174,8 +174,8 @@
       // attach-time install needed a window reload. Ship a new version by
       // bumping RT_EXT_VERSION there and cutting an image release.
       "extensions": [
-        // vscode-R, PINNED to the version the image bakes (3.0.1 since image
-        // v1.1.7 — the 3.0 migration). Keep this in lockstep with
+        // vscode-R, PINNED to the version the image bakes (3.2.0 since image
+        // v1.2.9; 3.0.1 from v1.1.7, the 3.0 migration). Keep this in lockstep with
         // VSCODE_R_VERSION in the PPBDS/devcontainers Dockerfile: the image
         // bakes this exact .vsix AND the `sess` R package bundled inside it,
         // which 3.x needs to attach to an R session (plots, workspace
@@ -188,7 +188,7 @@
         // image (see the Dockerfile), so VS Code finds them installed and
         // installs nothing at attach; the list stays so the pins are
         // declared where VS Code reads them.
-        "reditorsupport.r@3.0.1",
+        "reditorsupport.r@3.2.0",
         "quarto.quarto",
         "ritwickdey.LiveServer",
         "tomoki1207.pdf",
