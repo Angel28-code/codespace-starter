@@ -1,0 +1,19 @@
+# Quarto rendering artifacts and cache
+/.quarto/
+*_files/
+*_cache/
+.vdoc.*
+
+# R history and workspace state
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+.Rproj.user/
+Rplots.pdf
+
+# OS-specific and editor files
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
