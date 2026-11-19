@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Shark attacks",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "The Global Shark Attack File (GSAF) is a public database of reported shark-human incidents from around the world. Records can include details such as where and when an incident occurred, what the person was doing, and the outcome.\nFear of sharks can feel greater than the risk: incidents are uncommon, but dramatic stories can make rare events especially memorable. Sharks deserve respect, while the data can help put reported encounters in perspective.\nThe Map page shows recorded shark attacks by country. The Trends page compares fatal and non-fatal attacks by activity, including activities with at least 50 incidents with known outcomes."
   },
   {
     "objectID": "map.html",
@@ -12,5 +12,12 @@
     "title": "Map",
     "section": "",
     "text": "library(tidyverse)\nlibrary(maps)\n\n\nattacks &lt;- read_csv(\"data/attacks_clean.csv\") |&gt;\n  mutate(\n    Country_lower = str_to_lower(str_trim(Country)),\n    Fatal_clean = case_when(\n      Fatal == \"Y\" ~ \"Fatal\",\n      Fatal == \"N\" ~ \"Non-fatal\",\n      TRUE ~ \"Unknown\"\n    )\n  )\n\nRows: 5094 Columns: 15\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (14): Case_Number, Date, Type, Country, Area, Location, Activity, Name, ...\ndbl  (1): Year\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nwrite_rds(attacks, \"data/attacks.rds\")\n\n\nworld &lt;- map_data(\"world\") |&gt;\n  mutate(region = str_to_lower(region))\n\ncountry_attacks &lt;- attacks |&gt;\n  count(Country_lower, name = \"attacks\")\n\nworld |&gt;\n  left_join(country_attacks, by = c(\"region\" = \"Country_lower\")) |&gt;\n  ggplot(aes(x = long, y = lat, group = group, fill = attacks)) +\n  geom_polygon(color = \"white\", linewidth = 0.1) +\n  scale_fill_viridis_c(\n    name = \"Shark attacks\",\n    na.value = \"grey90\"\n  ) +\n  coord_quickmap() +\n  theme_void()"
+  },
+  {
+    "objectID": "trends.html",
+    "href": "trends.html",
+    "title": "Trends",
+    "section": "",
+    "text": "library(tidyverse)\n\n\nattacks &lt;- read_rds(\"data/attacks.rds\")\n\n\nattacks |&gt;\n  filter(!is.na(Activity), Fatal_clean != \"Unknown\") |&gt;\n  count(Activity, Fatal_clean, name = \"attacks\") |&gt;\n  group_by(Activity) |&gt;\n  filter(sum(attacks) &gt;= 50) |&gt;\n  ungroup() |&gt;\n  ggplot(aes(\n    x = fct_reorder(Activity, attacks, .fun = sum),\n    y = attacks,\n    fill = Fatal_clean\n  )) +\n  geom_col(position = \"dodge\") +\n  coord_flip() +\n  labs(\n    x = \"Activity\",\n    y = \"Number of attacks\",\n    fill = \"Outcome\"\n  ) +\n  theme_minimal()"
   }
 ]
