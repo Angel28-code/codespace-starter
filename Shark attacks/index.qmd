@@ -2,6 +2,8 @@
 title: "Shark attacks"
 ---
 
-This is a Quarto website.
+The Global Shark Attack File (GSAF) is a public database of reported shark-human incidents from around the world. Records can include details such as where and when an incident occurred, what the person was doing, and the outcome.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Fear of sharks can feel greater than the risk: incidents are uncommon, but dramatic stories can make rare events especially memorable. Sharks deserve respect, while the data can help put reported encounters in perspective.
+
+The **Map** page shows recorded shark attacks by country. The **Trends** page compares fatal and non-fatal attacks by activity, including activities with at least 50 incidents with known outcomes.
